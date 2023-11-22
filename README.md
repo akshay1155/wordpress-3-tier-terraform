@@ -1,7 +1,6 @@
 # wordpress-3-tier-terraform
 Terraform code for 3 tier architecture of wordpress using AWS 
-
-- The architecture contains the following AWS Components:
+<h4>The architecture contains the following AWS Components:</h4>
         - VPC, Subnets, IGW, NAT gateway, RouteTables, EC2, ELB, RDS.
 - First we created a VPC of CIDR block 10.0.0.0/16 
 - Created 3 subnets - 2 public and 1 private
@@ -18,34 +17,34 @@ Terraform code for 3 tier architecture of wordpress using AWS
 - Below was the user data script that we gave in wordpress server instance.
 
 - User data script given for installing wordpress in EC2 instance:
-> apt update && apt upgrade -y
-> apt install apache2 -y
-> apt install php php-mysql -y
-> echo '<?php phpinfo(); ?>' > /var/www/html/info.php
-> apt install mariadb-client php-mysql -y
-> cd /tmp && wget https://wordpress.org/latest.tar.gz
-> tar -xvf latest.tar.gz
-> cp -R wordpress /var/www/html/
-> chown -R www-data:www-data /var/www/html/wordpress/
-> chmod -R 755 /var/www/html/wordpress/
-> mkdir /var/www/html/wordpress/wp-content/uploads
-> chown -R www-data:www-data /var/www/html/wordpress/wp-content/uploads/
+> apt update && apt upgrade -y <br>
+> apt install apache2 -y  <br>
+> apt install php php-mysql -y <br>
+> echo '<?php phpinfo(); ?>' > /var/www/html/info.php <br>
+> apt install mariadb-client php-mysql -y <br>
+> cd /tmp && wget https://wordpress.org/latest.tar.gz <br>
+> tar -xvf latest.tar.gz <br>
+> cp -R wordpress /var/www/html/ <br>
+> chown -R www-data:www-data /var/www/html/wordpress/ <br>
+> chmod -R 755 /var/www/html/wordpress/ <br>
+> mkdir /var/www/html/wordpress/wp-content/uploads <br>
+> chown -R www-data:www-data /var/www/html/wordpress/wp-content/uploads/ <br>
 
 - We have configured the security group of the wordpress server by allowing port 80 as inbound rule from the load balancer security group.
 
 - For the database instance, the commands given for installing of the mysql database was:
-> apt update && apt upgrade -y
-> sudo apt install mariadb-server -y
-> sudo mysql_secure_installation
-> vi /etc/mysql/mariadb.conf.d/50-server.cnf   => change 121.0.0.1 to 0.0.0.0 for remote access.
-> systemctl restart mysql
-> mysql -u root -p
-> create user 'wordpress' identified by 'wordpress-pass';
-> grant all privileges on wordpress.* to wordpress;
-> flush privileges;
-> show databases;
-> create database wordpress;
-> exit
+> apt update && apt upgrade -y <br>
+> sudo apt install mariadb-server -y <br>
+> sudo mysql_secure_installation <br>
+> vi /etc/mysql/mariadb.conf.d/50-server.cnf   => change 121.0.0.1 to 0.0.0.0 for remote access. <br>
+> systemctl restart mysql <br> 
+> mysql -u root -p <br>
+> create user 'wordpress' identified by 'wordpress-pass'; <br>
+> grant all privileges on wordpress.* to wordpress; <br>
+> flush privileges; <br>
+> show databases; <br>
+> create database wordpress; <br>
+> exit <br>
 
 - For the database security group, we have been given access to the port 3306 from the security group of the wordpress server and 22 port from the bastion host security group.
 - While creating load balancer we have given the two public subnets and created the target group and added the wordpress server to that target group. 
