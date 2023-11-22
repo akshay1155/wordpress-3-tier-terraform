@@ -1,6 +1,6 @@
 # wordpress-3-tier-terraform
 Terraform code for 3 tier architecture of wordpress using AWS 
-<h4>The architecture contains the following AWS Components:</h4>
+- The architecture contains the following AWS Components:
         - VPC, Subnets, IGW, NAT gateway, RouteTables, EC2, ELB, RDS.
 - First we created a VPC of CIDR block 10.0.0.0/16 
 - Created 3 subnets - 2 public and 1 private
@@ -59,8 +59,9 @@ Terraform code for 3 tier architecture of wordpress using AWS
 
 - How to run the terraform code?
 - Download the code, ensure AWS CLI and terraform are installed in your system and give the following commands. Configure AWS through access keys if you haven't done before.
-> terraform init
-> terraform plan
-> terraform apply -auto-approve
+> terraform init <br>
+> terraform plan <br>
+> terraform apply -auto-approve <br>
 
-- For destroying the resources, > terraform destroy -auto-approve
+- For destroying the resources, <br>
+> terraform destroy -auto-approve
